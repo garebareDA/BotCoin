@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/garebareDA/BotCoin/handler"
 )
 
 func main() {
@@ -12,6 +13,8 @@ func main() {
 		log.Println("error creating Discord session, ", err)
 		return
 	}
+
+	dg.AddHandler(handler.AddUser)
 
 	err = dg.Open()
 	if err != nil {
