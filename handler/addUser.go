@@ -32,6 +32,8 @@ func AddUser(s *discordgo.Session, m *discordgo.MessageCreate) {
 	db, err := database.ConnectDB()
 	if err != nil {
 		log.Println(err)
+		s.ChannelMessageSend(m.ChannelID, "データベースエラー\n")
+		return
 	}
 
 	if err := db.Where("user_id = ?", id).First(&database.User{}).Error; err != nil {
