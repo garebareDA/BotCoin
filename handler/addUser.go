@@ -27,8 +27,6 @@ func AddUser(s *discordgo.Session, m *discordgo.MessageCreate) {
 	money := 1000
 
 	log.Println("logup " + name + " " + id)
-
-	//TODO DBに登録
 	db, err := database.ConnectDB()
 	if err != nil {
 		log.Println(err)
@@ -47,6 +45,5 @@ func AddUser(s *discordgo.Session, m *discordgo.MessageCreate) {
 		Money:    money,
 	}
 	db.Where(database.User{UserID: id}).FirstOrCreate(&user)
-
 	s.ChannelMessageSend(m.ChannelID, "口座の開設が完了しました\n")
 }

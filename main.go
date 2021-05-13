@@ -40,6 +40,7 @@ func main() {
 
 	dg.AddHandler(handler.AddUser)
 	dg.AddHandler(handler.CoinCheck)
+	dg.AddHandler(handler.AddCoin)
 
 	err = dg.Open()
 	if err != nil {
