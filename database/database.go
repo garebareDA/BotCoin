@@ -6,6 +6,6 @@ import (
 )
 
 func ConnectDB() (*gorm.DB, error) {
-	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("../test.db"), &gorm.Config{})
 	return db, err
 }

@@ -22,8 +22,8 @@ func AddUser(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	name := s.State.User.Username
-	id := s.State.User.ID
+	name := m.Author.Username
+	id := m.Author.ID
 	money := 1000
 
 	log.Println("logup " + name + " " + id)
@@ -36,7 +36,7 @@ func AddUser(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	if err := db.Where("user_id = ?", id).First(&database.User{}).Error; err != nil {
+	if err := db.Where("user_id = ?", id).First(&database.User{}).Error; err == nil {
 		s.ChannelMessageSend(m.ChannelID, "口座がすでに存在しています\n")
 		return
 	}
@@ -46,7 +46,7 @@ func AddUser(s *discordgo.Session, m *discordgo.MessageCreate) {
 		UserName: name,
 		Money:    money,
 	}
-	db.Where(database.User{UserID: id}).FirstOrInit(&user)
+	db.Where(database.User{UserID: id}).FirstOrCreate(&user)
 
 	s.ChannelMessageSend(m.ChannelID, "口座の開設が完了しました\n")
 }
