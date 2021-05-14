@@ -30,8 +30,6 @@ func main() {
 
 	db.AutoMigrate(&database.User{})
 
-	go database.DateUpdate()
-
 	dg, err := discordgo.New("Bot " + Token)
 	if err != nil {
 		log.Println("error creating Discord session, ", err)
