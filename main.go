@@ -42,6 +42,7 @@ func main() {
 	dg.AddHandler(handler.CoinCheck)
 	dg.AddHandler(handler.AddCoin)
 	dg.AddHandler(handler.SubCoin)
+	dg.AddHandler(handler.Transfer)
 
 	err = dg.Open()
 	if err != nil {
